@@ -1,0 +1,26 @@
+{
+    "name": "unoapp-dev/laravel-pubnub",
+    "type": "library",
+    "description": "Pubnub event broadcast driver for Laravel/Lumen",
+    "keywords": [
+        "pubnub",
+        "laravel",
+        "lumen"
+    ],
+    "homepage": "https://github.com/unoapp-dev/laravel-pubnub",
+    "license": "MIT",
+    "authors": [
+        {
+            "email": "anilahir@unoindia.co",
+            "name": "Anil Ahir"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Unoappdev\\PubnubDriver\\": "src/"
+        }
+    },
+    "require": {
+        "pubnub/pubnub": "^4.1"
+    } 
+}
