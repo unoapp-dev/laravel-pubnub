@@ -24,13 +24,22 @@
                 'socket' => Arr::pull($payload, 'socket'),
             ];
             
-            foreach ($this->formatChannels($channels) as $channel) {
-        
-                $this->pubnub->publish()
-                    ->channel($channel)
-                    ->message($payload)
-                    ->usePost(true)
-                    ->sync();
+            $channels = $this->formatChannels($channels);
+
+            $result = $this->pubnub->hereNow()
+                ->channels($channels)
+                ->includeUuids(false)
+                ->includeState(false)
+                ->sync();
+
+            foreach ($result->getChannels() as $channelData) {
+                if ($channelData->getOccupancy() >= 1) {
+                    $this->pubnub->publish()
+                        ->channel($channelData->getChannelName())
+                        ->message($payload)
+                        ->usePost(true)
+                        ->sync();
+                }
             }
         }
         
